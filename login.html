@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Form Events in Vue JS</title>
+    <style>
+    .btn {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 10px;
+        border: 1px solid #111;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="myApp">
+        <h1>Login</h1>
+
+        <input type="number" v-model="myVala"> 
+        + 
+        <input type="number" v-model="myValb">
+        = {{myCal}}
+
+      <!--   <div v-if="preview">
+            Logged In
+            <a @click="login" class="btn">login</a>
+        </div>
+        <div v-else>
+            Logged Out
+            <a @click="login" class="btn">logout</a>
+        </div> -->
+        <pre>
+            {{$data | json}}
+        </pre>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.25/vue.js"></script>
+    <script>
+    var vm = new Vue({
+        el: '#myApp',
+        data: {
+            myVala: 0,
+            myValb: 0,
+            preview: false,
+        },
+        methods: {
+            login: function() {
+                this.preview ^= true;
+            }
+        },
+        computed: {
+            myCal: function() {
+                return parseInt(this.myVala) + parseInt(this.myValb)
+            }
+        }
+    });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Learning Vue JS</title>
+	<style>
+		.red-4 {
+			background-color: #f00;
+		}
+		.red-5 {
+			background-color: #f15;
+		}
+		.btn {
+			border: 1px solid #111;
+			padding: 5px;
+		}
+		div {
+			margin: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div id="myApp">
+		<h1>{{{ output | uppercase }}}</h1>
+		<div class="red-{{count}}">
+			{{count + 1}}
+		</div>
+		<input v-model="searchme">
+		<div>
+			Searching for {{ searchme }}
+		</div>
+		<a v-on:click="vjson" href="#" class="btn">click me</a>
+		<ul>
+			<li v-for="index in items | filterBy searchme">
+				{{index.todo}}
+			</li>
+		</ul>
+
+		<div class="red-4 " v-show="visjson">
+			{{ $data | json }}
+		</div>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.25/vue.js"></script>
+	<script>
+		var vm = new Vue({
+			el: '#myApp',
+			data: {
+				searchme:'nothing yet',
+				error: 'wrong input',
+				visjson: true,
+				output: 'hello world',
+				count: 4,
+				items: [{todo:"write code"},{todo:"create website"}, {todo:"make image"}],
+			}, 
+			created: function(){
+				this.count++;
+				console.log('instance created ' + this.output);
+			},
+			ready: function(){
+				console.log('instance ready ' + this.output);
+			},
+			methods: {
+				vjson: function(){
+					console.log('clicked');
+					this.visjson ^= true;
+					this.output = "updated: " + this.count;
+					this.count++;
+				}
+			}
+		});
+
+		vm.output = "new <br> content";
+	</script>
+</body>
+</html>

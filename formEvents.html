@@ -1,0 +1,88 @@
+  <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Form Events in Vue JS</title>
+    <style>
+    .red-4 {
+        background-color: #f00;
+    }
+    
+    .red-5 {
+        background-color: #f15;
+    }
+    
+    .btn {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 10px;
+        border: 1px solid #111;
+    }
+    
+    div {
+        margin: 10px;
+    }
+    #newdiv {
+        height: 200px;
+        width: 200px;
+        background-color: aqua;
+    }
+    img {
+        display: block;
+    }
+    .transition-transition {
+        transition: all 1s ease;
+        height: 20px;
+        background-color: yellow;
+    }
+    .transition-enter, .transition-leave {
+        color: green;
+        height: 0px;
+        opacity: 0;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="myApp">
+        <h1>Searching for {{{ searchme | uppercase }}}</h1>
+        <input v-model="searchme">
+        <div v-for="index in items | filterBy searchme">    {{index.todo}}
+        </div>
+        <a class="btn" @click="toggleData">click</a>
+
+        <div id="newdiv" v-if="preview" transition="transition">some content</div>
+        <pre>
+            {{$data | json}}
+        </pre>
+
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.25/vue.js"></script>
+    <script>
+    var vm = new Vue({
+        el: '#myApp',
+        data: {
+                searchme: "",
+                imgPath: "http://lorempixel.com/400/200/sports/2",
+                items: [{
+                    todo: "create website"
+                }, {
+                    todo: "upload content"
+                }, {
+                    todo: "promote website"
+                }],
+                preview: false,
+
+            },
+        methods: {
+            toggleData: function(){
+                this.preview ^= true;
+            }
+        }
+    });
+    </script>
+</body>
+
+</html>

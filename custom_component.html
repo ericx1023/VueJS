@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Form Events in Vue JS</title>
+    <style>
+    .btn {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 10px;
+        border: 1px solid #111;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="myApp">
+        <h1>Custom Components</h1>
+        <pre>
+            {{$data | json}}
+        </pre>
+        <mycar :make="make" :model="model" :message="message" :count="count"></mycar>
+        <mycar :make="make" :model="model" :message="message" :count="count"></mycar>
+        <mycar :make="make" :model="model" :message="message" :count="count"></mycar>
+        <mycar :make="make" :model="model" :message="message" :count="count"></mycar>
+        <template id="car-template">
+            <h2>{{make}}</h2>
+            <h3>{{model}}</h3>
+            <div>Hello World {{ message }}</div>
+            <div> count: {{ count }}</div>
+            <button type="button"  @click="addCount" class="btn">vote for me</button>
+        </template>
+    </div> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.25/vue.js"></script>
+    <script>
+    Vue.component('mycar', {
+        template: '#car-template',
+        props: ['make','model','message', 'count'],
+        methods: {
+            addCount : function(e){
+                this.count++;
+            }
+        }
+    });
+    var vm = new Vue({
+        el: '#myApp',
+        data: {
+            make: 'Tesla',
+            model: '360',
+            message: 'Electronic Car ',
+            count: 0
+        },
+       });
+    </script>
+</body>
+
+</html>
